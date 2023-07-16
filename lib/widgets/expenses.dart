@@ -16,7 +16,7 @@ class _ExpensesState extends State<Expenses> {
         title: 'flutter',
         amount: 19.99,
         date: DateTime.now(),
-        category: Category.word),
+        category: Category.work),
     Expense(
         title: 'Cinema',
         amount: 15.50,
@@ -27,6 +27,12 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('track your expenses'),
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.add))
+        ],
+      ),
       body: Column(
         children: [
           const Text('chart'),
