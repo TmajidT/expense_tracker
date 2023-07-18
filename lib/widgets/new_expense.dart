@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/models/expense.dart' as CG;
+import 'package:expense_tracker/models/expense.dart';
 
 import 'package:intl/intl.dart';
 
@@ -17,6 +16,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleControler = TextEditingController();
   final _amountControler = TextEditingController();
   DateTime? _selectedDate;
+  Category _selectedCategory = Category.leisure;
 
   @override
   void dispose() {
@@ -82,8 +82,31 @@ class _NewExpenseState extends State<NewExpense> {
               )
             ],
           ),
+          const SizedBox(height: 20,),
           Row(
             children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map((category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(
+                            category.name.toUpperCase(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(
+                    () {
+                      if (value == null) {
+                        return;
+                      }
+                      _selectedCategory = value;
+                    },
+                  );
+                },
+              ),
+              Spacer(),
               ElevatedButton(
                 onPressed: () {
                   print(_titleControler.text);
@@ -91,18 +114,6 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: const Text('Save Expense'),
               ),
-              DropdownButton(
-                  items: CG.Category.values
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(
-                              category.name.toString(),
-                            ),
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    print(value);
-                  }),
               ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
