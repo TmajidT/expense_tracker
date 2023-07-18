@@ -25,12 +25,20 @@ class _ExpensesState extends State<Expenses> {
         category: Category.leisure),
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
+    );
+  }
 
-void _openAddExpenseOverlay(){ 
-  showModalBottomSheet(context: context, builder: (ctx) => const NewExpense(),
-  );
-}
-
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,8 @@ void _openAddExpenseOverlay(){
       appBar: AppBar(
         title: const Text('track your expenses'),
         actions: [
-          IconButton(onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
+          IconButton(
+              onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
       body: Column(
