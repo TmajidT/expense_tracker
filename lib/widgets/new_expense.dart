@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/models/expense.dart' as CG;
 
 import 'package:intl/intl.dart';
 
@@ -69,7 +71,9 @@ class _NewExpenseState extends State<NewExpense> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(_selectedDate == null ? 'No date selected' : formatter.format(_selectedDate!)),
+                    Text(_selectedDate == null
+                        ? 'No date selected'
+                        : formatter.format(_selectedDate!)),
                     IconButton(
                         onPressed: _presentDatePicker,
                         icon: Icon(Icons.calendar_month))
@@ -87,6 +91,18 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: const Text('Save Expense'),
               ),
+              DropdownButton(
+                  items: CG.Category.values
+                      .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(
+                              category.name.toString(),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    print(value);
+                  }),
               ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
