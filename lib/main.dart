@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'widgets/expenses.dart';
 
 var kColorScheme =
-    ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 185, 201, 82));
+    ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 70, 222, 118));
 
 var kDarkColorScheme =
     ColorScheme.fromSeed(brightness: Brightness.dark ,seedColor: Color.fromRGBO(30, 176, 198, 1));
@@ -20,7 +20,7 @@ void main() {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: kDarkColorScheme.primaryContainer,
-          //foregroundColor: kDarkColorScheme.primaryContainer,
+          foregroundColor: kDarkColorScheme.primaryContainer,
           ),
       ),
     ),
